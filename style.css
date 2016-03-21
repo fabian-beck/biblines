@@ -1,0 +1,15 @@
+body 
+{
+	background-color: ¹eeeeee;
+}
+
+div
+{
+	background-color: #ebebeb;
+	padding: 20px;
+	width: 50%;
+	font-size:20px;
+	font-family: calibri;
+	text-align: justify;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+}
