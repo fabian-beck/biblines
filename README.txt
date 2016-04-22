@@ -1,7 +1,16 @@
-ToDo:
+Comment: !-implemented (more or less);
+ToDO:
+1. Include all the dataset.
+1.1. Rearrange classes on the sparklines; make everything automatic more or less;
+1.2. try it on a sparkline first;
+1.3. Make it possible to change the barchart (timeline full-view) while clicking on different sparlines.
+2. Highlihting.
+
+---------------
+22.04
 0. The fild appears on the top or bottom, depending where the word you clicked on is.
-1. Align field in the landscape orientation.
-2. Implement timeline from the given project
+1. Align field in the landscape orientation.!
+2. Implement timeline from the given project. !
 
 ---------------
 12.04
