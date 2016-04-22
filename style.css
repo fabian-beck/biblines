@@ -1,15 +1,79 @@
+html
+{
+	height:100%;
+}
+
 body 
 {
 	background-color: #f9f9f9;
+	margin: 0px;
+	padding: 0px;
 }
 
-div
-{
-	background-color: #ebebeb;
-	padding: 20px;
-	width: 50%;
-	font-size:20px;
-	font-family: calibri;
-	text-align: justify;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5); 
+p{
+	margin: 0px 0px 10px 0px;
+}
+
+/*style for the portrait orientation*/
+@media all and (orientation:portrait) {
+	
+	div#left-side{
+		background-color: #ebebeb;
+		padding: 20px;
+		width: 100%;
+		font-size:30px;
+		font-family: calibri;
+		text-align: justify;
+		/*box-shadow: 0 0 10px rgba(0,0,0,0.5);*/
+		float: left;
+
+		box-sizing: border-box;
+		padding: 10px;		
+	}
+	
+	div#big-chart-container{
+		width:100%;
+		position: relative;
+	}
+	
+	div#big-chart{
+		width:100%;
+		margin:auto;
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		/*z-index: 1;*/
+		/*background-color:#000;
+		/*opacity: 0.95; /*прозрачность*/
+	}
+}
+
+
+/*style for the landscape orientation*/
+@media all and (orientation:landscape) {
+
+	div#left-side{
+		background-color: #ebebeb;
+		padding: 20px;
+		width: 50%;
+		font-size:20px;
+		font-family: calibri;
+		text-align: justify;
+		/*box-shadow: 0 0 10px rgba(0,0,0,0.5);*/
+		float: left;		
+	}
+
+	div#big-chart-container{
+		width:45%;
+		float: left;
+		height: 100%;
+		position: relative;
+	}
+
+	div#big-chart{
+		width:80%;
+		float: left;
+		margin:auto;
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;   
+	}
 }

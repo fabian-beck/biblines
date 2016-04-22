@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Sketch</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="timeline.css">
 	
 	<!--libraries for sparklificator-->
 	<script type="text/javascript" src="sparklificator/jquery-1.12.2.min.js"></script>
@@ -13,8 +14,8 @@
     <script type="text/javascript" src="sparklificator/renderers.js"></script>
     <script type="text/javascript" src="sparklificator/d3.min.js"></script>
 </head>
-<body>
-<div>
+<body style="height:100%;">
+	<div id="left-side">
 	<p>The visualization of dynamic graphs is a growing research area. Starting with <u>first approaches in the early 90s</u>, 
 	the field has been steadily growing to around <u>20 new publications per year <span class='spanToBarChart1'><u>recently</u></span></u>. 
 	While early publications mainly introduced new <u>visualization techniques</u>, currently a well-balanced mix of <u>technique</u>, 
@@ -30,11 +31,16 @@
 	<u>By 2010 and later</u>, these techniques 
 	are even dominating the newly proposed approaches, some combining animation and timeline in <u>hybrid <span class='spanToBarChart4'><u>techniques</u></span></u> .    
 	Also, researchers <u>recently</u> explored using <u>adjacency matrices</u> instead of <u>node-link diagrams</u> to represent the individual <span class='spanToBarChart5'>graphs</span>.     
-</p>
-</div>
-</body>
-	<!--my js file-->
+	</p>
+	</div>
+		<div id="big-chart-container">
+			<div id="big-chart" style="display: none;">
+			</div>
+		</div>
+	</body>
+	<!--my js files-->
 	<script type="text/javascript" src="bib.js"></script>
-	<script type="text/javascript" src="sparklificator/main.js"></script>
 	<script type="text/javascript" src="sparklificator/call_sparclificator.js"></script>
+	<script type="text/javascript" src="sparklificator/timeline.js"></script>
+	<script type="text/javascript" src="sparklificator/main.js"></script>
 </html>
