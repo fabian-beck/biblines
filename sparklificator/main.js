@@ -1,96 +1,28 @@
-var data1 = [];
-var data2 = [];
-var data3 = [];
-var data4 = [];
-var data5 = [];
-
-data1=numb_per_year(1990,1995,bib);
-data2=count_2keywords(1989,new Date().getFullYear(),['paradigm:node-link','time:animation'],bib);
-data3=count_1keyword(2002,new Date().getFullYear(),'time:timeline',bib);
-data4=count_1keyword(2010,new Date().getFullYear(),'animated_timeline',bib);
-data5=count_1abstract(2013,new Date().getFullYear(),'adjacency matrix',bib);
-
-
-/*function to get array for years to comparre with
-  and array for number of articles, where number of articles is stored*/
-function year_array(start_year, end_year){
-	var array = []; //array to store number of articles for each year
-	var years = []; //array to store list of years to compare with
-	years[0]=start_year; //set the first year
-			
-	for(var i=1;i<(end_year-start_year+1);i++) //full-year array with years from (strat_year to end_year)+1
-		years[i]=years[i-1]+1;
-			
-	//make all the values = 0 in an array
-	for(var i=0;i<years.length;i++)
-		array[i]=0;
+/* when clicking on a sparkline - do an action*/
+var flag = 0; 
+var clicked_spark_index = 0;
+$(document).ready(function() {
+        $('.sparkline').click(function() {
+			if (flag<1){
+				$('#big-chart').show();
+				
+				clicked_spark_index = $('.sparkline').index( this );
+				console.log("That was element with index " + clicked_spark_index );
 	
-	return [years, array];
-}
+				maxFrequency = Math.max.apply(Math,data_sparkline[clicked_spark_index].map(function(a) {return a.value;}));
+				
+				data = data_sparkline[clicked_spark_index];
+				console.log('maxFrequency='+maxFrequency);		
 
-/*function to count how many articles were published in each year*/
-function numb_per_year(start_year,end_year,bib){
-	var years = []; //array for years we compare with
-	var array = []; //array for number of article we counted while comparing
-	years =	year_array(start_year, end_year)[0];
-	array =	year_array(start_year, end_year)[1];
+				minYear = data[0].key;
+				maxYear = data[data.length-1].key;				
 
-	//search for articles in each year
-	for (var i=0;i<years.length;i++)
-		for (var el in bib)
-			if(bib[el].year==years[i])
-				array[i]+=1;
-			
-	return array;
-}
-
-/*function to count how many articles were published in each year & 
-  with the specific keyword*/
-function count_1keyword(start_year,end_year,keyword,bib){
-	var years = []; //array for years we compare with
-	var array = []; //array for number of article we counted while comparing
-	years =	year_array(start_year, end_year)[0];
-	array =	year_array(start_year, end_year)[1];
-
-	//search for articles in each year
-	for (var i=0;i<years.length;i++)
-		for (var el in bib)
-			if((bib[el].year==years[i])&&(bib[el].keywords.indexOf(keyword)>=0))
-				array[i]+=1;
-			
-	return array;
-}
-
-/*function to count how many articles were published 
-with two keywords*/
-function count_2keywords(start_year,end_year,keywords,bib){
-	var years = []; //array for years we compare with
-	var array = []; //array for number of article we counted while comparing
-	years =	year_array(start_year, end_year)[0];
-	array =	year_array(start_year, end_year)[1];
-
-	//search for articles in each year
-	for (var i=0;i<years.length;i++)
-		for (var el in bib)
-			if((bib[el].year==years[i])&&(bib[el].keywords.indexOf(keywords[0])>=0)&&(bib[el].keywords.indexOf(keywords[1])>=0))
-				array[i]+=1;
-			
-	return array;
-}
-
-/*function to count how many articles were published in each year & 
-  with the specific words in abstract*/
-function count_1abstract(start_year,end_year,keyword,bib){
-	var years = []; //array for years we compare with
-	var array = []; //array for number of article we counted while comparing
-	years =	year_array(start_year, end_year)[0];
-	array =	year_array(start_year, end_year)[1];
-
-	//search for articles in each year
-	for (var i=0;i<years.length;i++)
-		for (var el in bib)
-			if((bib[el].year==years[i])&&(bib[el].abstr.indexOf(keyword)>=0))
-				array[i]+=1;
-		
-	return array;
-}
+				show_timeline();
+				flag++;
+			}
+			else{
+				$('#big-chart').hide();
+				flag--;
+			}
+        });
+    });
