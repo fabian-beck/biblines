@@ -1,10 +1,10 @@
 Comment: !-implemented (more or less);
 ToDO:
-1. Highlihting.
+
+1. Interaction with hovering on text - highlighting bars?
 2. Normalization
-2.1. Check if yo can give the max frequency and normalise the little sparklines;
-3. Fix the bag with the forst and second sparkline that does not show whole set of bars;
-4. Delete spaces after the sparkline.
+2.1. Divide valuse by max frequency;
+3. Change the dataset chosen for sparklines;
 
 -----------------
 26.04
@@ -12,7 +12,9 @@ ToDO:
 1.1. Rearrange classes on the sparklines; make everything automatic more or less; !
 1.2. try it on a sparkline first; !
 1.3. Make it possible to change the barchart (timeline full-view) while clicking on different sparlines. !
-
+2. Highlihting. !
+3. Delete spaces after the sparkline. !
+4. Fix the bag with the first and second sparkline that does not show whole set of bars; !
 ---------------
 22.04
 0. The fild appears on the top or bottom, depending where the word you clicked on is.
