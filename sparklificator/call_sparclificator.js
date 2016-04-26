@@ -145,13 +145,13 @@ function count_1abstract(start_year,end_year,keyword,bib){
 }
 
 //form sparklines in a loop
-var colors=["blue","red","yellow","green","white"];
 $('.spanToBarChart').each(function(i)
 	{ 
-		var settings = {data: data_sparkline[i].map(function(a) {return a.value;}), renderer: barChart, position: 'right', paddingHeight: true, paddingWidth: true, height: 25};
+		var data_var=data_sparkline[i].map(function(a) {return a.value;});
+		var spark_width=data_sparkline[i].length; //for determining width for each sparkline individually
+		var settings = {data: data_var, renderer: barChart, position: 'right', paddingHeight: true, paddingWidth: true, width:spark_width*5, height: 25};
 	
 		$(this).sparklificator();
 		$(this).sparklificator('option', settings);
-		this.style.color = colors[i];
 	});
 
