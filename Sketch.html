@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Sketch</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="timeline.css">
 	
 	<!--libraries for sparklificator-->
 	<script type="text/javascript" src="sparklificator/jquery-1.12.2.min.js"></script>
@@ -13,10 +14,10 @@
     <script type="text/javascript" src="sparklificator/renderers.js"></script>
     <script type="text/javascript" src="sparklificator/d3.min.js"></script>
 </head>
-<body>
-<div>
+<body style="height:100%;">
+	<div id="left-side">
 	<p>The visualization of dynamic graphs is a growing research area. Starting with <u>first approaches in the early 90s</u>, 
-	the field has been steadily growing to around <u>20 new publications per year <span class='spanToBarChart1'><u>recently</u></span></u>. 
+	the field has been steadily growing to around <u>20 new publications per year <span class='spanToBarChart'><u>recently</u></span></u>. 
 	While early publications mainly introduced new <u>visualization techniques</u>, currently a well-balanced mix of <u>technique</u>, 
 	<u>application</u>, and <u>evaluation</u> papers is published.</p>
 
@@ -24,17 +25,23 @@
 	<img src="pic/legend.png" alt="TheLegend" width="100%"> 
   
 	<p>Among the <u>visualization techniques</u>, first, <u>animation-based approaches</u> showing graph evolution as animated changes in 
-	<u>node-link diagrams</u> <span class='spanToBarChart2'>dominated</span>. 
+	<u>node-link diagrams</u> <span class='spanToBarChart'>dominated</span>. 
 	<u>Since 2002</u>, however, alternative <u>timeline-based approaches</u> were suggested that 
-	provide an overview of the graph evolution in one view without <span class='spanToBarChart3'>animation</span>. 
+	provide an overview of the graph evolution in one view without <span class='spanToBarChart'>animation</span>. 
 	<u>By 2010 and later</u>, these techniques 
-	are even dominating the newly proposed approaches, some combining animation and timeline in <u>hybrid <span class='spanToBarChart4'><u>techniques</u></span></u> .    
-	Also, researchers <u>recently</u> explored using <u>adjacency matrices</u> instead of <u>node-link diagrams</u> to represent the individual <span class='spanToBarChart5'>graphs</span>.     
-</p>
-</div>
-</body>
-	<!--my js file-->
+	are even dominating the newly proposed approaches, some combining animation and timeline in <u>hybrid <span class='spanToBarChart'><u>techniques</u></span></u> .    
+	Also, researchers <u>recently</u> explored using <u>adjacency matrices</u> instead of <u>node-link diagrams</u> to represent the individual <span class='spanToBarChart'>graphs</span>.     
+	</p>
+	</div>
+		<div id="big-chart-container">
+			<div id="big-chart" style="display: none;">
+			</div>
+		</div>
+	</body>
+	<!--my js files-->
 	<script type="text/javascript" src="bib.js"></script>
-	<script type="text/javascript" src="sparklificator/main.js"></script>
 	<script type="text/javascript" src="sparklificator/call_sparclificator.js"></script>
+	
+	<script type="text/javascript" src="sparklificator/main.js"></script>
+	<script type="text/javascript" src="sparklificator/timeline.js"></script>
 </html>
