@@ -155,3 +155,4 @@ $('.spanToBarChart').each(function(i)
 		$(this).sparklificator();
 		$(this).sparklificator('option', settings);
 	});
+
