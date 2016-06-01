@@ -1,11 +1,12 @@
 var data_sparkline=[];
+var data_timeline = [];
 var data1 = [];
 var data2 = [];
 var data3 = [];
 var data4 = [];
 var data5 = [];
 
-data1=numb_per_year(1990,2015,bib);
+data1=numb_per_year(1990,new Date().getFullYear(),bib);
 data2=count_2keywords(1989,new Date().getFullYear(),['paradigm:node-link','time:animation'],bib);
 data3=count_1keyword(2002,new Date().getFullYear(),'time:timeline',bib);
 data4=count_1keyword(2010,new Date().getFullYear(),'animated_timeline',bib);
@@ -14,13 +15,18 @@ data5=count_1abstract(2013,new Date().getFullYear(),'adjacency matrix',bib);
 /*create a data for a sparkline
 as an array with 5 rows, each row contains a matrix 
 2x1 = years and number of publications*/
-data_sparkline.push(data1);
-data_sparkline.push(data2);
-data_sparkline.push(data3);
-data_sparkline.push(data4);
-data_sparkline.push(data5);
+data_sparkline.push(full_range(data1));
+data_sparkline.push(full_range(data2));
+data_sparkline.push(full_range(data3));
+data_sparkline.push(full_range(data4));
+data_sparkline.push(full_range(data5));
+data_timeline.push(data1);
+data_timeline.push(data2);
+data_timeline.push(data3);
+data_timeline.push(data4);
+data_timeline.push(data5);
 
-/*function to get array for years to comparre with
+/*function to get array for years to compare with
   and array for number of articles, where number of articles is stored*/
 function year_array(start_year, end_year){
 	var array = []; //array to store number of articles for each year
@@ -35,6 +41,40 @@ function year_array(start_year, end_year){
 		array[i]=0;
 	
 	return [years, array];
+}
+
+/*function for making arrays in full range years to make bars on sparks move to the correct
+positions*/
+function full_range(data)
+{
+	var arr = [];
+	var j=0;
+	var len = (new Date().getFullYear())-1989+1;
+	
+	var years = []
+	years[0]=1989;
+	for (var i=1;i<len;i++)
+		years[i]=years[i-1]+1;
+	arr.push({
+		key: 2017,
+		value: 22
+	});
+	
+	for (var i = 0; i < len; i++) {
+		if (years[i]==data[j].key){
+			arr.push({
+				key: years[i],
+				value: data[j].value
+			});
+			j++;
+		}
+		else
+			arr.push({
+				key: years[i],
+				value: ''
+			});
+	}
+	return arr;
 }
 
 /*function to count how many articles were published in each year*/
@@ -149,7 +189,7 @@ $('.spanToBarChart').each(function(i)
 	{ 
 		var data_var=data_sparkline[i].map(function(a) {return a.value;});
 		//var spark_width=data_sparkline[i].length; //for determining width for each sparkline individually
-		var spark_width = 2016-1990;
+		var spark_width = data_sparkline[0].length;;
 		var settings = {data: data_var, renderer: barChart, position: 'right', paddingHeight: true, paddingWidth: true, width:spark_width*5, height: 25};
 	
 		$(this).sparklificator();
