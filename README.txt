@@ -1,5 +1,5 @@
 Comment: !-implemented (more or less);
-ToDO:
+9.05
 1. Highlihting.
 2. Normalization
 2.1. Check if yo can give the max frequency and normalise the little sparklines;
