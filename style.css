@@ -18,6 +18,8 @@ p{
 .sparkline
 {
 	cursor: pointer;
+	border-style: solid;
+    border-width: 1px;
 }
 	
 .for
