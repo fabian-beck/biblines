@@ -1,10 +1,10 @@
 Comment: !-implemented (more or less);
 9.05
-1. Highlihting.
-2. Normalization
-2.1. Check if yo can give the max frequency and normalise the little sparklines;
-3. Fix the bag with the forst and second sparkline that does not show whole set of bars;
-4. Delete spaces after the sparkline.
+1. Highlihting.!
+2. Normalization !
+2.1. Check if yo can give the max frequency and normalise the little sparklines; !
+3. Fix the bag with the forst and second sparkline that does not show whole set of bars; !
+4. Delete spaces after the sparkline. !
 
 -----------------
 26.04
