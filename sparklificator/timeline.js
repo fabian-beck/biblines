@@ -1,5 +1,6 @@
-var data = []; 
-console.log(data);
+var data = [];
+var data2 = []; 
+
 var height = 100;
 var maxFrequency; //= 20;
 
@@ -9,8 +10,6 @@ var maxFrequencyIntervals = 5;
 
 var minYear;
 var maxYear;
-
-console.log(minYear, maxYear);
 
 function show_timeline(){
 	//create id and class for div "big-chart"
@@ -44,7 +43,8 @@ function drawTimeline(displayHeight, timelineDiv) {
         var publicationHeight = height / (maxFrequency + 1);
 
         drawBackground(barWidth, chart, displayHeight, publicationHeight, width);
-        drawFrequencyBars(chart, barWidth, publicationHeight);
+        drawFrequencyBars(chart, barWidth, publicationHeight, data);
+		drawFrequencyBarsOver(chart, barWidth, publicationHeight, data2);
 }
 
 function drawBackground(barWidth, chart, displayHeight, publicationHeight, width) {
@@ -94,10 +94,30 @@ function drawBackground(barWidth, chart, displayHeight, publicationHeight, width
         return {x: x, y: y};
 }
 
-function drawFrequencyBars(chart, barWidth, publicationHeight) {
+function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
 	chart.selectAll('svg').data(data).enter().append('rect')
             .style('fill', '#EEEEEE')
             .style('stroke', 'black')
+            .attr('shape-rendering', 'crispEdges')
+            .attr('x', function (d) {
+                return (d.key - minYear) * barWidth;
+            })
+            .attr('y', function (d) {
+                return height - publicationHeight * d.value-1;
+            })
+            .attr('width', barWidth)
+            .attr('height', function (d) {
+                return publicationHeight * d.value + 1;
+            })
+            .attr('title', function (d) { //I am not sure if we need this title at all, but let it be
+                return d.key + ': ' + d.value + ' publications';
+            }); 
+}
+
+function drawFrequencyBarsOver(chart, barWidth, publicationHeight, data) {
+	chart.selectAll('svg').data(data).enter().append('rect')
+            .style('fill', '#00b386')
+			.style('stroke', 'black')
             .attr('shape-rendering', 'crispEdges')
             .attr('x', function (d) {
                 return (d.key - minYear) * barWidth;
