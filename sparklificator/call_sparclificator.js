@@ -148,10 +148,10 @@ function count_1abstract(start_year,end_year,keyword,bib){
 $('.spanToBarChart').each(function(i)
 	{ 
 		var data_var=data_sparkline[i].map(function(a) {return a.value;});
-		var spark_width=data_sparkline[i].length; //for determining width for each sparkline individually
+		//var spark_width=data_sparkline[i].length; //for determining width for each sparkline individually
+		var spark_width = 2016-1990;
 		var settings = {data: data_var, renderer: barChart, position: 'right', paddingHeight: true, paddingWidth: true, width:spark_width*5, height: 25};
 	
 		$(this).sparklificator();
 		$(this).sparklificator('option', settings);
 	});
-
