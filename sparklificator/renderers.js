@@ -121,6 +121,7 @@ function classicSparkline(sparkSpan, width, height, interaction, data) {
 * @param {array} data - word-scale visualization's array of data
 **/
 function barChart(sparkSpan, width, height, interaction, data) {
+	
 
 	var o = this.options;
 
@@ -128,7 +129,7 @@ function barChart(sparkSpan, width, height, interaction, data) {
 	    widthVis = width - margin.left - margin.right,
 	    heightVis = height - margin.top - margin.bottom;
 
-	var barWidth = 5;
+	var barWidth = 4.3;
 
 	// clipping data array
 	var newData = data;
@@ -148,16 +149,24 @@ function barChart(sparkSpan, width, height, interaction, data) {
 		.style('position', 'absolute')
 		.attr('width', widthVis)
 		.attr('height', heightVis)
-		.attr('class', 'barChart');
+		.attr('class', 'barChart')
+		
+	drawBackground(barWidth, chart, height, width);
 
-
+	chart.append('rect').attr('class', 'overbackgr')
+                .attr('x', 0)
+                .attr('y', -1)
+                .attr('width', width)
+                .attr('height', height + 2)
+				.style('opacity', 0)
+				.style('fill','#439cee')
+				
 	// select sparklificatedSPAN, as the entity might be longer than the word-scale visualization
 	var entity = $(sparkSpan).closest($('.sparklificated'));
 	if (interaction) {
 		entity.on('mouseover', fade(1))
 			  .on('mouseout', fade(0.1));
 	}
-
 
 	var bar = chart.selectAll('g.bar')
 			.data(newData);
@@ -195,6 +204,55 @@ function barChart(sparkSpan, width, height, interaction, data) {
 
 			d3.select($(sparkSpan).siblings('.entity')[0]).style('opacity',textOpacity)
 	    };
+	}
+	
+	
+}
+
+/**
+* Draws a timeline-background for the sparkline
+* this.element and this.options is alvailable in the renderer if needed
+* @param {int} barWidth - width of a single bar in a sparkline
+* @param {string} chart - chart we are going to add a background to
+* @param {int} height - height of the word-scale visualization
+* @param {int} width - width of the word-scale visualization
+**/
+function drawBackground(barWidth, chart, height, width) {
+	var maxYear = 2016;
+	var minYear = 1992;
+	var niceIntervals = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000];
+	var maxYearIntervals = 10;
+	var maxFrequencyIntervals = 5;
+	
+    var yearIntervalIndex = 0;
+    while (yearIntervalIndex < niceIntervals.length - 1 && (maxYear - minYear) / niceIntervals[yearIntervalIndex] > maxYearIntervals) {
+        yearIntervalIndex++;
+    }
+    var yearIntervalLength = niceIntervals[yearIntervalIndex];
+	var even = 'Even';	
+	var flag =1;
+	for (var year = minYear; year <= maxYear+1; year++) {
+		if ((year%yearIntervalLength) == 0)
+		{
+			if (flag==1)
+			{
+				even='Uneven';
+				flag=0;
+			}
+			else
+			{
+				flag=1;
+				even='Even';
+			}
+		}
+		var x = (year - minYear) * barWidth;
+		chart.append('rect').attr('id', year)
+                .attr('shape-rendering', 'crispEdges')
+                .attr('x', x)
+                .attr('y', -1)
+                .attr('width', barWidth)
+                .attr('height', height + 2)
+                .style('fill', even == 'Even' ? '#FFFFFF' : '#CCCCCC');
 	}
 }
 

@@ -96,8 +96,8 @@ function drawBackground(barWidth, chart, displayHeight, publicationHeight, width
 
 function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
 	chart.selectAll('svg').data(data).enter().append('rect')
-            .style('fill', '#EEEEEE')
-            .style('stroke', 'black')
+            .style('fill', 'black') //#EEEEEE
+            //.style('stroke', 'black')
             .attr('shape-rendering', 'crispEdges')
             .attr('x', function (d) {
                 return (d.key - minYear) * barWidth;
@@ -105,7 +105,7 @@ function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
             .attr('y', function (d) {
                 return height - publicationHeight * d.value-1;
             })
-            .attr('width', barWidth)
+            .attr('width', barWidth-2.5)
             .attr('height', function (d) {
                 return publicationHeight * d.value + 1;
             })
@@ -116,8 +116,8 @@ function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
 
 function drawFrequencyBarsOver(chart, barWidth, publicationHeight, data) {
 	chart.selectAll('svg').data(data).enter().append('rect')
-            .style('fill', '#00b386')
-			.style('stroke', 'black')
+            .style('fill', '#666060')
+			//.style('stroke', 'black')
             .attr('shape-rendering', 'crispEdges')
             .attr('x', function (d) {
                 return (d.key - minYear) * barWidth;
@@ -125,7 +125,7 @@ function drawFrequencyBarsOver(chart, barWidth, publicationHeight, data) {
             .attr('y', function (d) {
                 return height - publicationHeight * d.value-1;
             })
-            .attr('width', barWidth)
+            .attr('width', barWidth-2.5)
             .attr('height', function (d) {
                 return publicationHeight * d.value + 1;
             })
