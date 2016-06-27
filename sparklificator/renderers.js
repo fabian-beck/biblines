@@ -153,13 +153,13 @@ function barChart(sparkSpan, width, height, interaction, data) {
 		
 	drawBackground(barWidth, chart, height, width);
 
-	chart.append('rect').attr('class', 'overbackgr')
+	/*chart.append('rect').attr('class', 'overbackgr')
                 .attr('x', 0)
                 .attr('y', -1)
                 .attr('width', width)
                 .attr('height', height + 2)
 				.style('opacity', 0)
-				.style('fill','#439cee')
+				.style('fill','#439cee')*/
 				
 	// select sparklificatedSPAN, as the entity might be longer than the word-scale visualization
 	var entity = $(sparkSpan).closest($('.sparklificated'));
@@ -170,13 +170,14 @@ function barChart(sparkSpan, width, height, interaction, data) {
 
 	var bar = chart.selectAll('g.bar')
 			.data(newData);
+	
 
 	var gBar = bar.enter().append('g')
 		.attr('class', 'bar')
 		.attr('transform', function(d, i) { return 'translate(' + i * barWidth + ',' + (heightVis - y(d)) + ')'; });
 
 	gBar.append('rect')
-	    .attr('width', barWidth - 2)
+	    .attr('width', barWidth-2) //-2 - to make the bars thiner
 	    .attr('height', function(d) { return y(d); });
 
 
@@ -229,30 +230,32 @@ function drawBackground(barWidth, chart, height, width) {
         yearIntervalIndex++;
     }
     var yearIntervalLength = niceIntervals[yearIntervalIndex];
-	var even = 'Even';	
-	var flag =1;
-	for (var year = minYear; year <= maxYear+1; year++) {
-		if ((year%yearIntervalLength) == 0)
-		{
-			if (flag==1)
-			{
-				even='Uneven';
-				flag=0;
-			}
-			else
-			{
-				flag=1;
-				even='Even';
-			}
-		}
+	
+    for (var intervalYear = minYear - minYear % yearIntervalLength; intervalYear <= maxYear; intervalYear += yearIntervalLength) {
+        var x = (intervalYear - minYear) * barWidth;
+        var even = intervalYear % (2 * yearIntervalLength) == 0 ? 'Even' : 'Uneven';
+            chart.append('rect').attr('class', 'period' + even)
+                .attr('shape-rendering', 'crispEdges')
+                .attr('x', x)
+                .attr('y', -1)
+                .attr('width', yearIntervalLength * barWidth)
+                .attr('height', height + 2)
+                .style('fill', even == 'Even' ? '#FFFFFF' : '#CCCCCC');
+        }
+
+		/*draw rectangles for highlighting the background of a sparkline
+		when you hover on a specific words in text*/
+		for (var year = minYear; year <= maxYear+1; year++) {
 		var x = (year - minYear) * barWidth;
-		chart.append('rect').attr('id', year)
+		chart.append('rect').attr('class', 'background '+ year)
+				//.attr('class', 'background')
                 .attr('shape-rendering', 'crispEdges')
                 .attr('x', x)
                 .attr('y', -1)
                 .attr('width', barWidth)
                 .attr('height', height + 2)
-                .style('fill', even == 'Even' ? '#FFFFFF' : '#CCCCCC');
+                .style('fill', '#439cee')
+				.style('opacity',0);
 	}
 }
 

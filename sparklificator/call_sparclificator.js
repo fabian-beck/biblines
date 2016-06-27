@@ -7,10 +7,15 @@ var data4 = [];
 var data5 = [];
 
 data1=numb_per_year(1992,new Date().getFullYear(),bib);
-data2=count_2keywords(1992,new Date().getFullYear(),['paradigm:node-link','time:animation'],bib);
-data3=count_1keyword(2002,new Date().getFullYear(),'time:timeline',bib);
-data4=count_1keyword(2010,new Date().getFullYear(),'animated_timeline',bib);
-data5=count_1abstract(2013,new Date().getFullYear(),'adjacency matrix',bib);
+data2=count_2keywords(1992,new Date().getFullYear(),['paradigm:node-link','time:animation'],bib); //animation-based+node-link
+data3=count_1keyword(2002,new Date().getFullYear(),'time:timeline',bib); //timeline-based approaches since 2002
+data4=count_1keyword(2010,new Date().getFullYear(),'animated_timeline',bib); //hybrid techniques - animated timelines
+data5=count_1keyword(2008,new Date().getFullYear(),'paradigm:matrix',bib); //only adjacency matrix
+data6=count_1keyword(1992,new Date().getFullYear(),'paradigm:node-link',bib); //only node-link diagrams
+data7=numb_per_year(2010,new Date().getFullYear(),bib); //20 new publications per year recently
+data8=count_1keyword(1992,new Date().getFullYear(),'type:technique',bib); //type: technique papers
+data9=count_1keyword(1992,new Date().getFullYear(),'type:application',bib); //type: application papers
+data10=count_1keyword(1992,new Date().getFullYear(),'type:evaluation',bib); //type: evaluation papers
 
 /*create a data for a sparkline
 as an array with 5 rows, each row contains a matrix 
@@ -20,12 +25,22 @@ data_sparkline.push(full_range(data2));
 data_sparkline.push(full_range(data3));
 data_sparkline.push(full_range(data4));
 data_sparkline.push(full_range(data5));
+data_sparkline.push(full_range(data6));
+data_sparkline.push(full_range(data7));
+data_sparkline.push(full_range(data8));
+data_sparkline.push(full_range(data9));
+data_sparkline.push(full_range(data10));
 
 data_timeline.push(data1);
 data_timeline.push(data2);
 data_timeline.push(data3);
 data_timeline.push(data4);
 data_timeline.push(data5);
+data_timeline.push(data6);
+data_timeline.push(data7);
+data_timeline.push(data8);
+data_timeline.push(data9);
+data_timeline.push(data10);
 
 /*function to get array for years to compare with
   and array for number of articles, where number of articles is stored*/

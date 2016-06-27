@@ -1,5 +1,8 @@
 var data = [];
 var data2 = []; 
+var chart;
+var barWidth;
+var publicationHeight;
 
 var height = 100;
 var maxFrequency; //= 20;
@@ -33,18 +36,18 @@ function show_timeline(){
 
 function drawTimeline(displayHeight, timelineDiv) {
 	
-        var chart = d3.select('#timeline').append('svg')
+        chart = d3.select('#timeline').append('svg')
             .attr('class', 'chart')
             .style('border', '1px solid black')
             .attr('height', displayHeight + 'px');
         var width = timelineDiv.width() - 3;
         chart.attr('width', width + 'px');
-        var barWidth = width / (maxYear - minYear + 1);
-        var publicationHeight = height / (maxFrequency + 1);
+        barWidth = width / (maxYear - minYear + 1);
+        publicationHeight = height / (maxFrequency + 1);
 
         drawBackground(barWidth, chart, displayHeight, publicationHeight, width);
-        drawFrequencyBars(chart, barWidth, publicationHeight, data);
 		drawFrequencyBarsOver(chart, barWidth, publicationHeight, data2);
+        drawFrequencyBars(chart, barWidth, publicationHeight, data);		
 }
 
 function drawBackground(barWidth, chart, displayHeight, publicationHeight, width) {
@@ -96,8 +99,8 @@ function drawBackground(barWidth, chart, displayHeight, publicationHeight, width
 
 function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
 	chart.selectAll('svg').data(data).enter().append('rect')
-            .style('fill', 'black') //#EEEEEE
-            //.style('stroke', 'black')
+            .style('fill', 'black') 
+			.style('opacity', '0.5')
             .attr('shape-rendering', 'crispEdges')
             .attr('x', function (d) {
                 return (d.key - minYear) * barWidth;
@@ -109,15 +112,15 @@ function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
             .attr('height', function (d) {
                 return publicationHeight * d.value + 1;
             })
-            .attr('title', function (d) { //I am not sure if we need this title at all, but let it be
-                return d.key + ': ' + d.value + ' publications';
+            .attr('class', function (d) { //add class for each year on the timeline
+                return d.key;
             }); 
 }
 
 function drawFrequencyBarsOver(chart, barWidth, publicationHeight, data) {
 	chart.selectAll('svg').data(data).enter().append('rect')
             .style('fill', '#666060')
-			//.style('stroke', 'black')
+			.style('opacity', '0.7')
             .attr('shape-rendering', 'crispEdges')
             .attr('x', function (d) {
                 return (d.key - minYear) * barWidth;
@@ -129,7 +132,7 @@ function drawFrequencyBarsOver(chart, barWidth, publicationHeight, data) {
             .attr('height', function (d) {
                 return publicationHeight * d.value + 1;
             })
-            .attr('title', function (d) { //I am not sure if we need this title at all, but let it be
-                return d.key + ': ' + d.value + ' publications';
+			.attr('class', function (d) { //add class for each year on the timeline
+                return d.key;
             }); 
 }

@@ -31,6 +31,7 @@
 			height: 50,
 			data: [],
 			paddingWidth: true,
+			background:'red',
 			paddingHeight: false,
 			stackingOrder: 'front',
 			hoverInteraction: false,
@@ -107,8 +108,11 @@
 
 			var newWidth = $.isFunction(o.width) ? o.width.call(this) : o.width;
 			var newHeight = $.isFunction(o.height) ? o.height.call(this) : o.height;
+			background='red';
 
 			switch(option) {
+				case 'background': 
+					this._setNewBackground(sparklineSPAN, sparklificatedSPAN, background); break;
 				case 'position':
 				case 'paddingWidth':
 				case 'paddingHeight':
@@ -135,6 +139,12 @@
 			}
 		},
 
+		_setNewBackground: function(sparklineSPAN, sparklificatedSPAN, background){
+			var o=this.options;
+			var elementSPAN = this.element;
+			backgr='red';
+			sparklineSPAN.css('background-color:'+backgr);
+		},
 
 		/**
 		* Recomputes and sets the position of the word-scale visualization using the current settings.
@@ -222,7 +232,7 @@
 			sparklineSPAN.css('top', yOffset + 'px');
 			sparklineSPAN.css('left', xOffset + 'px');
 			sparklificatedSPAN.css('margin-top', marginTop);
-			sparklificatedSPAN.css('margin-right', marginRight);
+			sparklificatedSPAN.css('margin-right', marginRight+4);
 			sparklificatedSPAN.css('margin-left', marginLeft);
 			sparklificatedSPAN.css('margin-bottom', marginBottom);
 
