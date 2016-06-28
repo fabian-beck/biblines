@@ -1,8 +1,11 @@
 var data = [];
 var data2 = []; 
+var chart;
+var barWidth;
+var publicationHeight;
 
 var height = 100;
-var maxFrequency; //= 20;
+var maxFrequency;
 
 var niceIntervals = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000];
 var maxYearIntervals = 10;
@@ -33,18 +36,17 @@ function show_timeline(){
 
 function drawTimeline(displayHeight, timelineDiv) {
 	
-        var chart = d3.select('#timeline').append('svg')
+        chart = d3.select('#timeline').append('svg')
             .attr('class', 'chart')
             .style('border', '1px solid black')
             .attr('height', displayHeight + 'px');
         var width = timelineDiv.width() - 3;
         chart.attr('width', width + 'px');
-        var barWidth = width / (maxYear - minYear + 1);
-        var publicationHeight = height / (maxFrequency + 1);
+        barWidth = width / (maxYear - minYear + 1);
+        publicationHeight = height / (maxFrequency + 1);
 
         drawBackground(barWidth, chart, displayHeight, publicationHeight, width);
-        drawFrequencyBars(chart, barWidth, publicationHeight, data);
-		drawFrequencyBarsOver(chart, barWidth, publicationHeight, data2);
+        drawFrequencyBars(chart, barWidth, publicationHeight, data);	
 }
 
 function drawBackground(barWidth, chart, displayHeight, publicationHeight, width) {
@@ -91,13 +93,28 @@ function drawBackground(barWidth, chart, displayHeight, publicationHeight, width
                 .style('font-size', '12pt')
                 .text(i);
         }
+		
+	/*Draw rectangles for highlighting the background of a sparkline
+	when you hover on a specific words in text.
+	Result: builds background rectangles for each year*/
+	for (var year = minYear; year < maxYear+1; year++) {
+		var x = (year - minYear) * barWidth;
+		chart.append('rect').attr('class', 'background '+ year)
+            .attr('shape-rendering', 'crispEdges')
+            .attr('x', x)
+            .attr('y', -1)
+            .attr('width', barWidth)
+            .attr('height', height + 2)
+            .style('fill', '#439cee')
+			.style('opacity',0);
+	}
         return {x: x, y: y};
 }
 
-function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
+function drawFrequencyBars(chart, barWidth, publicationHeight, data, color='#5c5b5b', opacity='1') {
 	chart.selectAll('svg').data(data).enter().append('rect')
-            .style('fill', '#EEEEEE')
-            .style('stroke', 'black')
+            .style('fill', color) 
+			.style('opacity', opacity)
             .attr('shape-rendering', 'crispEdges')
             .attr('x', function (d) {
                 return (d.key - minYear) * barWidth;
@@ -105,31 +122,11 @@ function drawFrequencyBars(chart, barWidth, publicationHeight, data) {
             .attr('y', function (d) {
                 return height - publicationHeight * d.value-1;
             })
-            .attr('width', barWidth)
+            .attr('width', barWidth-2.5)
             .attr('height', function (d) {
                 return publicationHeight * d.value + 1;
             })
-            .attr('title', function (d) { //I am not sure if we need this title at all, but let it be
-                return d.key + ': ' + d.value + ' publications';
-            }); 
-}
-
-function drawFrequencyBarsOver(chart, barWidth, publicationHeight, data) {
-	chart.selectAll('svg').data(data).enter().append('rect')
-            .style('fill', '#00b386')
-			.style('stroke', 'black')
-            .attr('shape-rendering', 'crispEdges')
-            .attr('x', function (d) {
-                return (d.key - minYear) * barWidth;
-            })
-            .attr('y', function (d) {
-                return height - publicationHeight * d.value-1;
-            })
-            .attr('width', barWidth)
-            .attr('height', function (d) {
-                return publicationHeight * d.value + 1;
-            })
-            .attr('title', function (d) { //I am not sure if we need this title at all, but let it be
-                return d.key + ': ' + d.value + ' publications';
+            .attr('class', function (d) { //add class for each year on the timeline
+                return 'bar_timeline '+d.key;
             }); 
 }
