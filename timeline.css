@@ -1,0 +1,16 @@
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.chart rect.bar {
+    cursor: pointer;
+}
+
+#timeline {
+    overflow: auto;
+}
+
+#timeline .label {
+    float:left;
+}
+
