@@ -1,43 +1,24 @@
 var data_sparkline=[];
-var data_timeline = [];
-var data1 = []; var data2 = []; var data3 = []; var data4 = []; var data5 = []; 
-var data6 = []; var data7 = []; var data8 = []; var data9 = []; var data10 = [];
+var data_timeline=[];
 
-data1=numb_per_year(1992,new Date().getFullYear(),bib);
-data2=count_2keywords(1992,new Date().getFullYear(),['paradigm:node-link','time:animation'],bib); //animation-based+node-link
-data3=count_1keyword(2002,new Date().getFullYear(),'time:timeline',bib); //timeline-based approaches since 2002
-data4=count_1keyword(2010,new Date().getFullYear(),'animated_timeline',bib); //hybrid techniques - animated timelines
-data5=count_1keyword(2008,new Date().getFullYear(),'paradigm:matrix',bib); //only adjacency matrix
-data6=count_1keyword(1992,new Date().getFullYear(),'paradigm:node-link',bib); //only node-link diagrams
-data7=numb_per_year(2010,new Date().getFullYear(),bib); //20 new publications per year recently
-data8=count_1keyword(1992,new Date().getFullYear(),'type:technique',bib); //type: technique papers
-data9=count_1keyword(1992,new Date().getFullYear(),'type:application',bib); //type: application papers
-data10=count_1keyword(1992,new Date().getFullYear(),'type:evaluation',bib); //type: evaluation papers
+var minYear=1992; //the earliest year we have in data
+var maxYear = new Date().getFullYear();//current Year
+var maxNumbPubl = 20; //the maximum number of pubications
 
-/*create a data for a sparkline
-as an array with 5 rows, each row contains a matrix 
-2x1 = years and number of publications*/
-data_sparkline.push(full_range(data1));
-data_sparkline.push(full_range(data2));
-data_sparkline.push(full_range(data3));
-data_sparkline.push(full_range(data4));
-data_sparkline.push(full_range(data5));
-data_sparkline.push(full_range(data6));
-data_sparkline.push(full_range(data7));
-data_sparkline.push(full_range(data8));
-data_sparkline.push(full_range(data9));
-data_sparkline.push(full_range(data10));
+data_timeline[0]=numb_per_year(minYear,maxYear,bib);
+data_timeline[1]=count_2keywords(minYear,maxYear,['paradigm:node-link','time:animation'],bib); 	//animation-based+node-link
+data_timeline[2]=count_1keyword(2002,maxYear,'time:timeline',bib); 							//timeline-based approaches since 2002
+data_timeline[3]=count_1keyword(2010,maxYear,'animated_timeline',bib); 						//hybrid techniques - animated timelines
+data_timeline[4]=count_1keyword(2008,maxYear,'paradigm:matrix',bib); 						//only adjacency matrix
+data_timeline[5]=count_1keyword(minYear,maxYear,'paradigm:node-link',bib); 					//only node-link diagrams
+data_timeline[6]=numb_per_year(2010,maxYear,bib); 											//20 new publications per year recently
+data_timeline[7]=count_1keyword(minYear,maxYear,'type:technique',bib); 						//type: technique papers
+data_timeline[8]=count_1keyword(minYear,maxYear,'type:application',bib); 					//type: application papers
+data_timeline[9]=count_1keyword(minYear,maxYear,'type:evaluation',bib); 					//type: evaluation papers
 
-data_timeline.push(data1);
-data_timeline.push(data2);
-data_timeline.push(data3);
-data_timeline.push(data4);
-data_timeline.push(data5);
-data_timeline.push(data6);
-data_timeline.push(data7);
-data_timeline.push(data8);
-data_timeline.push(data9);
-data_timeline.push(data10);
+for (var i=0;i<data_timeline.length;i++){
+	data_sparkline.push(full_range(data_timeline[i]));
+}
 
  /**
 * Function to get array for years to compare with in the function with keywords
@@ -60,16 +41,21 @@ function year_array(start_year, end_year){
 	return [years, array];
 }
 
-/*function for making arrays in full range years to make bars on sparks move to the correct
-positions*/
+
+ /**
+* Function which makes array in the full range years 
+* to make bars on sparks move to the correct positions
+* and array for number of articles, where number of articles is stored
+* @data {int[][]} - array with years and number of publkications [year: value]
+**/
 function full_range(data)
 {
 	var arr = [];
 	var j=0;
-	var len = (new Date().getFullYear())-1992+1;
+	var len = (new Date().getFullYear())-minYear+1;
 	
 	var years = []
-	years[0]=1992;
+	years[0]=minYear;
 	for (var i=1;i<len;i++)
 		years[i]=years[i-1]+1;
 	
@@ -87,10 +73,6 @@ function full_range(data)
 				value: ''
 			});
 	}
-	arr.push({
-		key: 2017,
-		value: 22
-	});
 	return arr;
 }
 
@@ -226,9 +208,8 @@ function count_1abstract(start_year,end_year,keyword,bib){
 $('.spanToBarChart').each(function(i)
 	{ 
 		var data_var=data_sparkline[i].map(function(a) {return a.value;});
-		//var spark_width=data_sparkline[i].length; //for determining width for each sparkline individually
 		var spark_width = data_sparkline[0].length;;
-		var settings = {data: data_var, renderer: barChart, position: 'right', paddingHeight: true, paddingWidth: true, width:spark_width*4.3, height: 22, background: 'red'};
+		var settings = {data: data_var, renderer: barChart, position: 'right', paddingHeight: true, paddingWidth: true, width:spark_width*4.3, height: maxNumbPubl};
 	
 		$(this).sparklificator();
 		$(this).sparklificator('option', settings);
