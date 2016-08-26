@@ -7,36 +7,52 @@
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="timeline.css">
 	
+	<link rel="stylesheet" type="text/css" href="tooltipster/css/tooltipster.bundle.min.css"/>
+	<link rel="stylesheet" type="text/css" href="tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css"/>
+	
 	<!--libraries for sparklificator-->
 	<script type="text/javascript" src="sparklificator/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="sparklificator/jquery-ui-1.10.4.widget.min.js"></script>
     <script type="text/javascript" src="sparklificator/jquery.sparklificator.js"></script>
     <script type="text/javascript" src="sparklificator/renderers.js"></script>
     <script type="text/javascript" src="sparklificator/d3.min.js"></script>
+	
+	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>-->
+    <script type="text/javascript" src="tooltipster/js/tooltipster.bundle.min.js"></script>
 </head>
 <body style="height:100%;">
 	<div id="left-side">
 	<h1>A Brief History of Dynamic Graph Visualization</h1>
 	<p>The visualization of dynamic graphs is a growing research area. <span class="highlight_it">Starting with <span class='first-90 keyword'>first approaches in the 90s</span>, 
 	the field has been steadily growing to around <span class='spanToBarChart'><span class='new-20-per-year keyword'>20 new publications per year recently</span></span></span>. 
-	While early publications mainly introduced new <span class='technique keyword'>visualization techniques</span>, currently a well-balanced mix of <span class='technique keyword'>technique</span>, 
+	While early publications mainly introduced new <span class='technique keyword tooltip' title='hello'>visualization techniques</span>, currently a well-balanced mix of <span class='technique keyword'>technique</span>, 
 	<span class='application keyword'>application</span>, and <span class='evaluation keyword'>evaluation</span> papers is published.</p>
 	
-	<div id="big-chart"></div>
+	<div class="chart">
+		<div id="big-chart"></div>
+		<div class='legend'> <div id="square-main"></div> - current state </div>
+		<div class='legend'> <div id="square-second"></div> - second</div>
+	</div>
+	
 	<p><span class="highlight_it">First, <span class='anim-based keyword'>animation-based approaches</span> showing graph evolution as animated changes in 
 	<span class='node-link-only keyword'>node-link diagrams</span> <span class='spanToBarChart'>dominated</span>.</span> 
 	<span class="highlight_it"><span class='since-2002 keyword'>Since 2002</span>, however, alternative <span class='timeline-based keyword'>timeline-based approaches</span> were suggested that 
 	provide an overview of the graph evolution in one view without <span class='spanToBarChart'>animation</span>.</span> 
 	<span class="highlight_it"><span class='by-2010 keyword'>By 2010 and later</span>, these techniques 
 	are even dominating the newly proposed approaches, some combining animation and timeline in <span class='spanToBarChart'><span class='hybrid keyword'>hybrid techniques</span></span></span>.    
-	<span class="highlight_it">Also, researchers <span class='recently-adj keyword'>recently</span> explored using <span class='adj-matrix keyword'>adjacency matrices</span> instead of <span class='node-link-only keyword'> node-link diagrams</span> to represent the individual <span class='spanToBarChart'>graphs</span>.</span>     
+	<span class="highlight_it">Also, researchers <span class='recently-adj keyword tooltip'>recently</span> explored using <span class='adj-matrix keyword'>adjacency matrices</span> instead of <span class='node-link-only keyword'> node-link diagrams</span> to represent the individual <span class='spanToBarChart'>graphs</span>.</span>     
 	</p>
 	</div>
+
+	<div id='mytooltip'>I will be changed!</div>
+</div>
+
+
+	
 	</body>
 	<!--my js files-->
 	<script type="text/javascript" src="bib.js"></script>
-	<script type="text/javascript" src="sparklificator/call_sparclificator.js"></script>
-	
+	<script type="text/javascript" src="sparklificator/call_sparclificator.js"></script>	
 	<script type="text/javascript" src="sparklificator/main.js"></script>
-	<script type="text/javascript" src="sparklificator/timeline.js"></script>
+	<script type="text/javascript" src="sparklificator/timeline.js"></script>	
 </html>
