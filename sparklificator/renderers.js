@@ -140,7 +140,7 @@ function barChart(sparkSpan, width, height, interaction, data) {
 	sparkContainer.append('svg');
 
 	var y = d3.scale.linear()
-		.domain([0, d3.max(newData, function(d) { return d })])
+		.domain([0, maxNumbPubl+2])
 		.range([0, heightVis]);
 
 	var chart = sparkContainer.select('svg')

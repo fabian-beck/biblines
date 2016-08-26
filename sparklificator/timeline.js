@@ -5,20 +5,16 @@ var barWidth;
 var publicationHeight;
 
 var height = 100;
-var maxFrequency;
 
 var niceIntervals = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000];
 var maxYearIntervals = 10;
 var maxFrequencyIntervals = 5;
 
-var minYear;
-var maxYear;
-
 function show_timeline(){
 	//create id and class for div "big-chart"
 	$('<div>', {
-                id: 'timeline',
-                class: 'toggle-container'
+                id: 'timeline'
+                //class: 'toggle-container'
     }).appendTo($('#big-chart'));
 	
 	var displayHeight = height;
@@ -27,7 +23,7 @@ function show_timeline(){
 
 	$('<div>', {
 		class: 'label',
-        text: 'publications per year'
+        text: 'Publications per year'
     }).appendTo(timelineDiv);
 			
 	drawTimeline(displayHeight, timelineDiv);
@@ -124,8 +120,15 @@ function drawFrequencyBars(chart, barWidth, publicationHeight, data, color='#5c5
             })
             .attr('width', barWidth-2.5)
             .attr('height', function (d) {
-                return publicationHeight * d.value + 1;
+				if (d.value!=0)
+				{
+					return publicationHeight * d.value+1;
+				}
+				else return publicationHeight * d.value;
             })
+			.attr('title', function (d) {
+				return d.key + ': '+d.value + ' publications';
+			})
             .attr('class', function (d) { //add class for each year on the timeline
                 return 'bar_timeline '+d.key;
             }); 
