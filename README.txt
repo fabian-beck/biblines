@@ -6,10 +6,8 @@ I. INTERACTION:
 3. When you click on a sparkline - it stays on a timeline (becomes a "base", so to say).
 4. When you hover on bars on a timeline - the corresponding years and number of publications are shown as a tooltip.
 5. When you hover on a keyword - it gets highlighted with gray color.
-6. When you hover on a sparkline - corresponding sentence is highlighted with gray color. 
+6. When you hover on a sparkline - corresponding sentence is highlighted with blue color. 
 7. There is a legend, which changes if the base changes.
-8. When you hover on a key word or a sparkline that draws additional barchart on a timeline (above base), secon element of the legend appears.
+8. When you hover on a keyword or a sparkline that draws additional barchart on a timeline (above base), second element of the legend appears.
 
 
-To Do (??)
-1. Nice arrows on tooltips.
