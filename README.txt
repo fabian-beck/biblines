@@ -1,4 +1,4 @@
-Pre-final version of a biblines. 26.08 - last update.
+Final version of a biblines. 14.09 - last update.
 
 I. INTERACTION:
 1. When you hower on some keywors (in bold) - it eigher highlites (with yellow) smth on (both) sparkline and timeline, or shows overlaying bars on a big timeline.
