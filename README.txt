@@ -13,6 +13,3 @@ I. INTERACTION:
 
 To Do (??)
 1. Nice arrows on tooltips.
-2. Blue highlighting of the sentences instead of the gray (??).
-3. Think about coloring of the bars (still should stay in a grayscale).
-  
