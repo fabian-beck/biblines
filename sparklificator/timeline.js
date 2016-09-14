@@ -107,7 +107,8 @@ function drawBackground(barWidth, chart, displayHeight, publicationHeight, width
         return {x: x, y: y};
 }
 
-function drawFrequencyBars(chart, barWidth, publicationHeight, data, color='#5c5b5b', opacity='1') {
+//color='#5c5b5b'
+function drawFrequencyBars(chart, barWidth, publicationHeight, data, color='#5e5b5b', opacity='1') {
 	chart.selectAll('svg').data(data).enter().append('rect')
             .style('fill', color) 
 			.style('opacity', opacity)
