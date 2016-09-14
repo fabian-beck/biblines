@@ -27,7 +27,8 @@ p{
 .hlt_gray 
 {
 	border-radius: 5px;
-	background: #ebebeb; 
+	/*background: #ebebeb; - gray*/  
+	background: rgba(179,215,248,0.5); 
 }
 
 h1
@@ -44,12 +45,14 @@ h1
 .keyword:hover
 {
 	border-radius: 5px;
-	background: #ebebeb; 
+	background: rgba(179,215,248,0.5); 
+	/*background: #ebebeb; */
 }
 
 .legend
 {
 	display: inline-block;
+	font-size: 18px;
 }
 
 /*style for the portrait orientation*/
@@ -90,7 +93,7 @@ h1
 	}
 
 	div.chart{
-		width:60%;
+		width:70%;
 		padding: 20px;
 		margin:auto;
 	}
@@ -99,7 +102,7 @@ h1
 #square-main {
 	width: 15px;
 	height: 15px;
-	background: red;
+	background: #5e5b5b;
 	display: inline-block;
 	border-style: solid;
     border-width: 2px;
@@ -108,7 +111,7 @@ h1
 #square-second {
 	width: 15px;
 	height: 15px;
-	background: blue;
+	background: #8080ff;
 	display: inline-block;
 	border-style: solid;
     border-width: 2px;

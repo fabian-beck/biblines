@@ -38,7 +38,7 @@ $(document).ready(function() {
 				$('.highlight_it').eq(index).addClass('hlt_gray').removeClass('highlight_it');
 				
                 data2 = data_timeline[index];	
-				drawFrequencyBars(chart, barWidth, publicationHeight, data2, 'black', '0.5');	
+				drawFrequencyBars(chart, barWidth, publicationHeight, data2, 'blue', '0.5');	
 
 				change_second_legend(index,'visible');	
 		});
@@ -119,7 +119,7 @@ $(document).ready(function() {
 			var legendIndex = legendHlDict[mouseoverClass].legendIndex;
 
 			data2 = data_timeline[dataIndex];	
-			drawFrequencyBars(chart, barWidth, publicationHeight, data2, 'black', '0.5');
+			drawFrequencyBars(chart, barWidth, publicationHeight, data2, 'blue', '0.5');
 			change_second_legend(legendIndex, 'visible');	
 			
 			}catch(err){};
